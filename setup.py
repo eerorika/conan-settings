@@ -11,13 +11,12 @@ setup(
     license='MIT',
     packages=find_packages(),
     install_requires=[
-        'PyYAML',
         'HiYaPyCo',
         'conan',
     ],
     entry_points={
         'console_scripts': [
-            'conan-settings = conan-settings.cli:main'
+            'conan-settings = conan_settings.cli:main'
         ]
     },
 )
