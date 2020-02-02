@@ -1,0 +1,4 @@
+compiler:
+  clang:
+    version:
+      - '11'
