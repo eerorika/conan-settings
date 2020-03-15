@@ -25,6 +25,17 @@ def get_stdin():
         else None
 
 
+def default_settings():
+    if hasattr(cache, 'default_settings_yml'):
+        # pre conan 1.23
+        return cache.default_settings_yml
+    elif hasattr(cache, 'get_default_settings_yml'):
+        # conan 1.23 an later
+        return cache.get_default_settings_yml()
+    else:
+        raise Exception('Unsupported version of Conan. Please report to issue tracker, with details about the version.')
+
+
 def main():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
@@ -47,7 +58,7 @@ def main():
 
     existing = cache.load(path) \
         if os.path.exists(path) \
-        else cache.default_settings_yml
+        else default_settings()
     method = hiyapyco.METHODS[args.method]
     settings = hiyapyco.load(
         [existing, in_data],
